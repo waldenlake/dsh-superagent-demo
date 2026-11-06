@@ -48,3 +48,19 @@ Features:
 
 The `shots/` folder contains reference screenshots of the login,
 register and home screens captured on the agent's PR.
+
+## Auto Deployment
+
+Every push to the repository triggers the `Auto Deploy` GitHub Actions
+workflow (`.github/workflows/deploy.yml`), which builds the static bundle
+with `pnpm build`. Pushes to `main` additionally publish the bundle to
+GitHub Pages via `actions/deploy-pages`.
+
+One-time prerequisite — before the first automatic deployment succeeds:
+
+1. In the repository, go to **Settings → Pages**.
+2. Set **Source** to **GitHub Actions** (not "Deploy from a branch").
+
+Until that is configured, the workflow builds on every push but skips the
+Pages publication step. After configuration, each push to `main` refreshes
+the live site at `https://<owner>.github.io/<repo>/`.
